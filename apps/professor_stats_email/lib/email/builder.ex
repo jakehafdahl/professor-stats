@@ -8,11 +8,12 @@ defmodule ProfessorStats.WeeklyEmailBuilder do
 	def build_email_info(team, settings, config) do
 		player_info = players_for(team)
 		|> Enum.map(fn player -> 
+			projection = Repo.one(PlayerProjection.get_for_player_and_week(player, config.week, config.season_year))
+			
 			score = settings
 			|> Enum.filter(fn setting -> setting.position == player.position end)
 			|> Enum.map(fn setting -> 
-				Repo.all(PlayerProjection.get_for_player_and_week(player, config.week, config.season_year))
-				|> Enum.map(fn projection -> PlayerProjection.apply_settings(projection,setting) end)
+				PlayerProjection.apply_setting(projection,setting)
 			end)
 			|> Enum.reduce(&+/2)
 
@@ -27,4 +28,6 @@ defmodule ProfessorStats.WeeklyEmailBuilder do
 
 		players = team_players |> Enum.map(fn team_player -> Repo.preload(team_player, :player).player end)
 	end
+
+
 end

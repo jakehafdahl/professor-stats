@@ -1,5 +1,6 @@
 defmodule ProfessorStats.ScoringSetting do
-	use Ecto.Model
+	use Ecto.Schema
+	import Ecto.Query
 	import Ecto.Changeset
 
 	schema "scoring_settings" do

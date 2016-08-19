@@ -8,16 +8,11 @@ defmodule ProfessorStats.Email do
 		children = [
       		supervisor(ProfessorStats.Models.Repo, []),
 			supervisor(ProfessorStats.CalcService,[]),
-			supervisor(ProfessorStats.ScheduleService,[]),
-			worker(Task, [ProfessorStats.Email, :loop, args])
+			supervisor(ProfessorStats.ScheduleService,[])
 		]
 
 		opts = [strategy: :one_for_one, name: ProfessorStats.Supervisor]
 
 		Supervisor.start_link(children, opts)
-	end
-
-	def loop do
-		loop
 	end
 end

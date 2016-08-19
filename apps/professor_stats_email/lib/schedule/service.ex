@@ -1,5 +1,6 @@
 defmodule ProfessorStats.ScheduleService do
 	import Ecto.Query
+	import Ecto.Changeset
 
 	alias ProfessorStats.Models.Repo
 	alias ProfessorStats.ScheduleConfig
@@ -36,7 +37,16 @@ defmodule ProfessorStats.ScheduleService do
 			teams
 			|> Enum.each(fn team -> Task.start(fn -> 
 				TeamCalculator.calculate_and_send(team, config)
-			end) end)
+				end) 
+			end)
+
+			config = Ecto.Changeset.change config, status: "DONE"
+
+			case Repo.update config do
+				{:ok, struct}       -> IO.puts("success")
+				{:error, changeset} -> IO.puts("error")
+			end
+
 		end)
 
 

@@ -1,5 +1,6 @@
 defmodule ProfessorStats.Player do
-	use Ecto.Model
+	use Ecto.Schema
+	import Ecto.Query
 	import Ecto.Changeset
 	
 	schema "players" do
@@ -7,7 +8,6 @@ defmodule ProfessorStats.Player do
 		field :last_name, :string
 		field :position, :string
 		field :team, :string
-    	has_many :team_players, ProfessorStats.TeamPlayer, foreign_key: :player_id
 
     	timestamps
 	end 

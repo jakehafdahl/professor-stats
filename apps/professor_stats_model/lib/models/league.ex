@@ -1,5 +1,6 @@
 defmodule ProfessorStats.League do
-	use Ecto.Model
+	use Ecto.Schema
+	import Ecto.Query
 	import Ecto.Changeset
 
 	alias ProfessorStats.Models.Repo
@@ -17,7 +18,7 @@ defmodule ProfessorStats.League do
 	end
 
 	def get_for_team(team) do
-		from l in ProfessorStats.League, where: l.team_id == ^team.id, select: l
+		from l in ProfessorStats.League, where: ^team.id == l.team_id, select: l
 	end
 
 	@required_params ~w(league_name)

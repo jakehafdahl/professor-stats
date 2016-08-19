@@ -1,5 +1,6 @@
 defmodule ProfessorStats.ScheduleConfig do
-	use Ecto.Model
+	use Ecto.Schema
+	import Ecto.Query
 	import Ecto.Changeset
 
 	schema "configs" do

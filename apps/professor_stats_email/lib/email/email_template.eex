@@ -1,1 +1,8 @@
-<%= team.team_name %>
+<html>
+	<body>
+		<h2>Team Name:<%= email_info.team.team_name %></h2>
+		<ul>
+			<%= email_info.player_info |> Enum.map(fn player ->  "<li>#{player.player.first_name} #{player.player.last_name}: #{player.score}</li>" end) |> Enum.join("") %>
+		</ul>
+	</body>
+</html>

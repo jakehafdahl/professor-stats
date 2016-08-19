@@ -1,5 +1,6 @@
 defmodule ProfessorStats.TeamPlayer do
-	use Ecto.Model
+	use Ecto.Schema
+	import Ecto.Query
 	import Ecto.Changeset
 
 	schema "team_players" do

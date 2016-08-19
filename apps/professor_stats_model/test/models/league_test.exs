@@ -6,6 +6,6 @@ defmodule ProfessorStats.LeagueTest do
 	test "required fields (league_name)" do
 		league_changeset = League.changeset(%League{}, %{})
 
-		assert [league_name: "can't be blank"] = league_changeset.errors
+		assert [league_name: {"can't be blank", []}] = league_changeset.errors
 	end
 end

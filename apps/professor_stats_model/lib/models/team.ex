@@ -1,5 +1,6 @@
 defmodule ProfessorStats.Team do
-	use Ecto.Model
+	use Ecto.Schema
+	import Ecto.Query
 	import Ecto.Changeset
 	
 	alias ProfessorStats.Models.Repo

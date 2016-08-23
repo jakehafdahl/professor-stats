@@ -24,11 +24,7 @@ defmodule ProfessorStats.ScheduleService do
 	def loop_process do
 		# get all configurations that are within 24 hours of now and not completed
 		now = Ecto.DateTime.utc() 
-		configs = Repo.all(
-			from sc in ScheduleConfig,
-				where: sc.run_date < ^now and sc.status == "WAITING",
-			select: sc
-		)
+		configs = Repo.all(ScheduleConfig.waiting_configs(now))
 		
 		teams = Repo.all(ProfessorStats.Team)
 		configs
@@ -43,8 +39,8 @@ defmodule ProfessorStats.ScheduleService do
 			config = Ecto.Changeset.change config, status: "DONE"
 
 			case Repo.update config do
-				{:ok, struct}       -> IO.puts("success")
-				{:error, changeset} -> IO.puts("error")
+				{:ok, struct}       -> Logger.info("success")
+				{:error, changeset} -> Logger.error("error")
 			end
 
 		end)

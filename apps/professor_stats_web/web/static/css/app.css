@@ -76,3 +76,7 @@ form.link, form.button {
     border-bottom: 0;
   }
 }
+
+.team-table, .team-table > thead > tr > th, .team-table > tbody > tr > td {
+	border: 1px solid black;
+}

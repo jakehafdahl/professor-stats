@@ -19,4 +19,10 @@ defmodule ProfessorStats.ScheduleConfig do
 		model
 		|> cast(params, @required_params, @optional_params)
 	end
+
+	def waiting_configs(date) do
+		from sc in ProfessorStats.ScheduleConfig,
+			where: sc.run_date < ^date and sc.status == "WAITING",
+			select: sc
+	end
 end

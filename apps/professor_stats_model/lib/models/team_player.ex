@@ -21,4 +21,8 @@ defmodule ProfessorStats.TeamPlayer do
 	def team_players_for(team) do
 		from tp in ProfessorStats.TeamPlayer, where: tp.team_id == ^team.id, select: tp
 	end
+
+	def team_player_for(team, player_id) do
+		from tp in ProfessorStats.TeamPlayer, where: tp.team_id == ^team and tp.player_id == ^player_id
+	end
 end

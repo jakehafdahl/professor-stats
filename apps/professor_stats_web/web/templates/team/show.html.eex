@@ -1,0 +1,31 @@
+<div class="jumbotron">
+  <h2>Team: <%= @team.team_name %></h2>
+  <h3>Current Players:</h3>
+  <table class="team-table">
+    <thead>
+      <tr>
+        <th>Position</th>
+        <th>Name</th>
+        <th>Team</th>
+        <th>Remove</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= Enum.map @players, fn player -> %>
+        <tr>
+          <td>
+            <%= player.position %>
+          </td>
+          <td>
+            <%= player.first_name <> " " <> player.last_name%> 
+          </td>
+          <td>
+            <%= player.team %>
+          </td>
+          <td>
+            <a href="<%= @team.id %>/remove/<%= player.id %>">X</a>
+          </td>
+      <% end %>
+    </tbody>
+  </table>
+</div>
